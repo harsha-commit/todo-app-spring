@@ -58,7 +58,7 @@ public class TodoController {
         return new ResponseEntity<>(todoDto, HttpStatus.OK);
     }
 
-    // Build Inomplete Todo REST API
+    // Build Incomplete Todo REST API
     @PatchMapping("/incomplete/{id}")
     public ResponseEntity<TodoDto> incompleteTodo(@PathVariable Long id){
         TodoDto todoDto = todoService.incompleteTodo(id);
