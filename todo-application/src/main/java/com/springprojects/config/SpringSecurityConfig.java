@@ -2,6 +2,7 @@ package com.springprojects.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +31,16 @@ public class SpringSecurityConfig {
         http.csrf((csrf) -> {
             try {
                 csrf.disable().authorizeHttpRequests((authorize) -> {
+
+//                    authorize.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN");
+//                    authorize.requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN");
+//                    authorize.requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN");
+//                    authorize.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "USER");
+//                    authorize.requestMatchers(HttpMethod.PATCH, "/api/**").hasAnyRole("ADMIN", "USER");
+
+                    authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll();
                     authorize.anyRequest().authenticated();
+
                 }).httpBasic(Customizer.withDefaults());
             } catch (Exception e) {
                 throw new RuntimeException(e);
